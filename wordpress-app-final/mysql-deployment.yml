@@ -1,0 +1,48 @@
+#WordPress Challenge
+
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: mysqlap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysqlap
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysqlap
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:5.7
+       # ports:
+       # - containerPort: 80
+        volumeMounts:
+        - mountPath: "/var/lib/mysql"
+          name: mysql-persistent-storage
+     #   envFrom:
+      #    - secretRef:
+       #         name: mysql-pass
+        ports:
+        - containerPort: 3306
+       #   name: mysql
+        env:
+           - name: MYSQL_ROOT_PASSWORD
+             valueFrom:
+                secretKeyRef:
+                   name: mysql-pass
+                   key: password
+      volumes:
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: mysql-persistent-storage
+     #   - name: WORDPRESS_DB_PASSWORD
+      #    secret:
+       #      secretName: mysql-pass
+        

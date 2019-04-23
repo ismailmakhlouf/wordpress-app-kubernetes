@@ -1,0 +1,21 @@
+#WordPress challenge
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-persistent-storage
+  labels:
+     app: sqlap
+spec:
+  accessModes:
+    - ReadWriteMany
+  #volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
+  #storageClassName: slow
+  #selector:
+  #  matchLabels:
+  #    name: "mysql-persistent-storage"
+    #matchExpressions:
+     # - {key: environment, operator: In, values: [dev]}

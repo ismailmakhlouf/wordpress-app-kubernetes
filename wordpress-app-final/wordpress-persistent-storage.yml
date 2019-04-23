@@ -1,0 +1,23 @@
+# WordPress Challenge
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: wordpress-persistent-storage
+  labels:
+    app: wordpress
+    tier: frontend
+spec:
+  capacity:
+    storage: 1Gi
+#  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  #persistentVolumeReclaimPolicy: Recycle
+ # storageClassName: slow
+ # mountOptions:
+  #  - hard
+   # - nfsvers=4.1
+  nfs:
+    path: /html
+    server: nfs01

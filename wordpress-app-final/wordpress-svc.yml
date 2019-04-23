@@ -1,0 +1,19 @@
+#WordPress Challenge
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: wordpress
+  labels:
+    app: wp
+spec:
+ # selector:
+  #  app: MyApp
+  type: NodePort
+  ports:
+  - targetPort: 80
+    port: 80
+    nodePort: 31004
+  selector:
+    app: wp
+    type: front-end
