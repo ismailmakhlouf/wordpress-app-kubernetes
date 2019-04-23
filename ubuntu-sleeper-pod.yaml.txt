@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: 2019-04-11T17:44:29Z
+  name: ubuntu-sleeper
+  namespace: default
+  resourceVersion: "1483"
+  selfLink: /api/v1/namespaces/default/pods/ubuntu-sleeper
+  uid: 74d539cc-5c81-11e9-a712-0242ac110015
+spec:
+  containers:
+  - command:
+    - sleep
+    - "4800"
+    securityContext:
+       runAsUser: 1000
+       capabilities:
+           add: ["SYS_TIME"]
+    image: ubuntu
+    imagePullPolicy: Always
+    name: ubuntu
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-bh92m
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  nodeName: node01
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: default-token-bh92m
+    secret:
+      defaultMode: 420
+      secretName: default-token-bh92m
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: 2019-04-11T17:44:29Z
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: 2019-04-11T17:44:35Z
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: null
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: 2019-04-11T17:44:29Z
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://9b6137b15a0fa960462963b78d40964d64fe565c02aee33d4c3e12c27cfb750a
+    image: ubuntu:latest
+    imageID: docker-pullable://ubuntu@sha256:017eef0b616011647b269b5c65826e2e2ebddbe5d1f8c1e56b3599fb14fabec8
+    lastState: {}
+    name: ubuntu
+    ready: true
+    restartCount: 0
+    state:
+      running:
+        startedAt: 2019-04-11T17:44:35Z
+  hostIP: 172.17.0.31
+  phase: Running
+  podIP: 10.32.0.2
+  qosClass: BestEffort
+  startTime: 2019-04-11T17:44:29Z

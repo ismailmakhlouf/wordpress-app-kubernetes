@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue
+  labels:
+    type: front-end
+  
+
+spec:
+ template:
+   metadata:
+       name: httpd-frontend
+       labels:
+         type: front-end
+   spec:
+      containers:
+      - name: nginxcontainer
+        image: nginx
+ replicas: 6
+ selector:
+   matchLabels:
+     type: front-end
+ NodeAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: color
+              operator: Equal
+              values: 
+              - blue

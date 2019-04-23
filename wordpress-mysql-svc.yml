@@ -1,0 +1,18 @@
+#WordPress Challenge
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: wordpress-mysql
+  #labels:
+  #  app: mysqlap
+spec:
+ # selector:
+  #  app: MyApp
+  type: ClusterIP
+  ports:
+  - targetPort: 3306
+    port: 3306
+  
+  selector:
+    app: mysqlap

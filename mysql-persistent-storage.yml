@@ -1,0 +1,22 @@
+# WordPress Challenge
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-persistent-storage
+  labels:
+    app: sqlap
+spec:
+  capacity:
+    storage: 1Gi
+ # volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+#  storageClassName: slow
+ # mountOptions:
+  #  - hard
+   # - nfsvers=4.1
+  nfs:
+    path: /mysql
+    server: nfs01

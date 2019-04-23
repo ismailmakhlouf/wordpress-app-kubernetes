@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: 2019-04-15T16:32:30Z
+  name: throw-dice-pod
+  namespace: default
+  resourceVersion: "2216"
+  selfLink: /api/v1/namespaces/default/pods/throw-dice-pod
+  uid: 10943149-5f9c-11e9-9229-0242ac110017
+spec:
+  containers:
+  - image: kodekloud/throw-dice
+    imagePullPolicy: Always
+    name: throw-dice
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-srp5t
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  nodeName: node01
+  priority: 0
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: default-token-srp5t
+    secret:
+      defaultMode: 420
+      secretName: default-token-srp5t
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: 2019-04-15T16:32:30Z
+    reason: PodCompleted
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: 2019-04-15T16:32:30Z
+    reason: PodCompleted
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: null
+    reason: PodCompleted
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: 2019-04-15T16:32:30Z
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://cbed19637e49993f551c13b4e7d88b38d517f506a79af432fbe66fa49816770d
+    image: kodekloud/throw-dice:latest
+    imageID: docker-pullable://kodekloud/throw-dice@sha256:9c70a0f907b99293885a9591b6162e9ec89e127937626a97ca7f9f6be2d98b01
+    lastState: {}
+    name: throw-dice
+    ready: false
+    restartCount: 0
+    state:
+      terminated:
+        containerID: docker://cbed19637e49993f551c13b4e7d88b38d517f506a79af432fbe66fa49816770d
+        exitCode: 0
+        finishedAt: 2019-04-15T16:32:34Z
+        reason: Completed
+        startedAt: 2019-04-15T16:32:34Z
+  hostIP: 172.17.0.32
+  phase: Succeeded
+  podIP: 10.44.0.1
+  qosClass: BestEffort
+  startTime: 2019-04-15T16:32:30Z

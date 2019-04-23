@@ -1,0 +1,39 @@
+#network policy practice test
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+   name: internal-policy
+ # annotations:
+  #  nginx.ingress.kubernetes.io/rewrite-target: /
+   # nginx.ingress.kubernetes.io/ssl-redirect: "false"
+ # creationTimestamp: 2019-04-18T16:30:11Z
+ # generation: 2
+ # name: ingress-wear-watch
+ # namespace: app-space
+ # resourceVersion: "4641"
+  #selfLink: /apis/extensions/v1beta1/namespaces/app-space/ingresses/ingress-wear-watch
+  #uid: 3c8dd9c7-61f7-11e9-8889-0242ac1100c3
+spec:
+  podSelector:
+     matchLabels:
+    # role: db
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+         matchLabels:
+             name: payroll
+    ports:
+    - protocol: TCP
+      port: 8080
+  - to:
+    - podSelector:
+         matchLabels:
+             name: mysql
+    ports:
+    - protocol: TCP
+      port: 3306
+#status:
+ # loadBalancer: {}

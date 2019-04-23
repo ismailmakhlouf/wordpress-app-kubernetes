@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  #creationTimestamp: 2019-04-18T16:30:11Z
+  #generation: 2
+  name: ingress-pay
+  namespace: critical-space
+
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: pay-service
+          servicePort: 8282
+        path: /pay
+
+status:
+  loadBalancer: {}
